@@ -13,7 +13,7 @@ prompt_dict = [
         {"role": "system", "content": "You are an AI assistant."},
         {"role": "user", "content": "Who are you?"}
     ],
-     [
+    [
         {"role": "system", "content": "You are an AI assistant."},
         {"role": "user", "content": "What's up?"}
     ]
