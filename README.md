@@ -25,8 +25,8 @@ After fine-tuning, the model underwent Direct Preference Optimization (DPO) to e
 
 | Model Name | Release Date |Release Note | Reference|
 |------------|-------------|-------------|-------------|
-| Krutrim-2-Base   | 2024-01-31  | Continually Pre-trained on MN12B base | [Here](https://huggingface.co/krutrim-ai-labs/Krutrim-2-base)%7C
-| Krutrim-2-Instruct  | 2024-01-31 | Finetuned and DPOed version of Krutrim-2-Base |[Here](https://huggingface.co/krutrim-ai-labs/Krutrim-2-instruct)%7C
+| Krutrim-2-Base   | 2024-01-31  | Continually Pre-trained on MN12B base | [Here](https://huggingface.co/krutrim-ai-labs/Krutrim-2-base)
+| Krutrim-2-Instruct  | 2024-01-31 | Finetuned and DPOed version of Krutrim-2-Base |[Here](https://huggingface.co/krutrim-ai-labs/Krutrim-2-instruct)
 
 
 ## Data Freshness
@@ -41,7 +41,7 @@ After fine-tuning, the model underwent Direct Preference Optimization (DPO) to e
 - Number of Heads: 32
 - Number of KV-Heads: 8 (GQA)
 - Rotary Embeddings: Theta = 1M
-- Vocabulary Size: 131072 (2^17)
+- Vocabulary Size: 131072 (2<sup>17</sup>)
 - Architecture Type: Transformer Decoder (Auto-regressive Language Model)
 
 ## Evaluation Results
@@ -96,10 +96,29 @@ The existing Indic benchmarks are not natively in Indian languages, rather, they
 ### Qualitative Results
 Below are the results from manual evaluation of prompt-response pairs across languages and task categories. Scores are between 1-5 (higher the better). Model names were anonymised during the evaluation.
 
-<Gallery />
+![Cumulative Score - Category](./assets/CumulativeScoreCategory.png)
+![Cumulative Score - Language](./assets/CumulativeScoreLangauge.png)
 
 ## Usage
-To use the model, you can load it with `AutoModelForCausalLM` as follows:
+
+To run this model, do this:
+```
+git clone github.com/ola-krutrim/Krutrim-2-12B.git
+cd Krutrim-2-12B
+pip install -r requirements.txt
+```
+
+To test the base model, you can run
+```
+python inference/inference.py
+```
+
+To test batch inference of instruct model, you can run
+```
+python inference/batch_inference.py
+```
+
+To use the instruct model, you can load it with `AutoModelForCausalLM` as follows:
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -110,30 +129,26 @@ model_id = "krutrim-ai-labs/Krutrim-2-instruct"
 # Load model and tokenizer
 model = AutoModelForCausalLM.from_pretrained(model_id)
 tokenizer = AutoTokenizer.from_pretrained(model_id)
+```
 
-# Add custom chat template
-tokenizer.chat_template = """{% for message in messages %}{% if message['role'] == 'system' %}{{ '<|system|>\n' + message['content'] + '\n' }}{% elif message['role'] == 'user' %}{{ '<|user|>\n' + message['content'] + '\n' }}{% elif message['role'] == 'assistant' %}{% if not loop.last %}{{ '<|assistant|>\n' + message['content'] + eos_token + '\n' }}{% else %}{{ '<|assistant|>\n' + message['content'] + eos_token }}{% endif %}{% endif %}{% if loop.last and add_generation_prompt %}{{ '<|assistant|>\n' }}{% endif %}{% endfor %}"""
+To generate, first format the prompt in OpenAI Chat Message Format and apply chat template. 
+```python
 
-print(tokenizer.get_chat_template())
-
-prompt_dict = [{"role":'system','content':"You are an AI assistant."},{"role":'user','content':"Who are you?"}]
+prompt_dict = [
+    {"role":'system','content':"You are an AI assistant."},
+    {"role":'user','content':"Who are you?"}
+]
 prompt = tokenizer.apply_chat_template(prompt_dict, add_generation_prompt=True, tokenize=False)
 inputs = tokenizer(prompt, return_tensors='pt')
 inputs.pop("token_type_ids", None)
 
 # Generate response
+# Generate response
 outputs = model.generate(
     **inputs,
-    max_length=4096,
-    temperature=0.5,
-    top_k=50,
-    top_p=0.9,
-    repetition_penalty=1.2,
-    num_return_sequences=1,
-    do_sample=True,
-    eos_token_id=2,
+    max_length=100
 )
 
-response_list = [tokenizer.decode(output).split(prompt)[1] for output in outputs]
+response = tokenizer.decode(outputs[0])
 ```
-Note: The provided chat template, which is the default chat template, helps generate the best response by structuring conversations optimally for the model.
+
