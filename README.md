@@ -152,3 +152,21 @@ outputs = model.generate(
 response = tokenizer.decode(outputs[0])
 ```
 
+## Limitations
+The model was trained on a dataset that includes content from the internet, which may contain toxic language, biases, and unsafe content. As a result, the model may:
+- Amplify biases present in the training data
+- Generate toxic responses, especially when prompted with toxic inputs
+- Provide inaccurate, incomplete, or redundant answers
+- Generate responses in languages inconsistent with the prompt
+
+## License
+TBD
+
+## Ethical Considerations
+- The model may produce biased or offensive outputs based on its training data.
+- Users should apply human oversight when using the model for decision-making in sensitive areas.
+- While safeguards have been implemented, the model may still generate socially undesirable text in certain contexts.
+
+## Contact
+TBD
+
