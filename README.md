@@ -7,6 +7,9 @@ After fine-tuning, the model underwent Direct Preference Optimization (DPO) to e
 
 The model delivers best-in-class performance across Indic tasks and a promising performance on English benchmarks equivalent to models 5-10x the size. We present details of the model architecture, pre-training, post-training and evaluation results. We also publicly release the post-trained versions of the model. We are continuously improving the model through post-training techniques such as RLHF. 
 
+[![Krutrim 2](https://img.youtube.com/vi/beqXNHq67xg/0.jpg)](https://www.youtube.com/watch?v=beqXNHq67xg)
+
+
 ## Key Features
 - 12B parameter dense transformer model leading to better generalization compared to Krutrim-1 7B;
 - Supports context up to 128K tokens making it suitable for long multi-turn conversations, long-form generations, document translations and others;
