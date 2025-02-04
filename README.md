@@ -65,7 +65,7 @@ The model delivers best-in-class performance across Indic tasks and a promising 
 | ARC_Challenge (0-shot) - Accuracy         | 0.48         | 0.59           | 0.60               | 0.93 (25-shot)       | -                      | 0.50                  |
 | ARC_Easy (0-shot) - Accuracy              | 0.73         | 0.80           | 0.82               | -                    | -                      | -                     |
 | HumanEval - Pass@10                       | 0.00         | 0.23           | 0.80               | 0.88                 | 0.74 (0-shot)          | 0.90                  |
-| IF_Eval (0-shot) - Accuracy               | 0.16         | 0.46           | 0.73               | 0.92                 | -                      | 0.84                  |
+| IF_Eval (0-shot) - Accuracy               | 0.27         | 0.46           | 0.73               | 0.92                 | -                      | 0.84                  |
 
 ### Indic Benchmarks
 
@@ -135,7 +135,6 @@ inputs = tokenizer(prompt, return_tensors='pt')
 inputs.pop("token_type_ids", None)
 
 # Generate response
-# Generate response
 outputs = model.generate(
     **inputs,
     max_length=100
@@ -157,7 +156,7 @@ The model was trained on a dataset that includes content from the internet, whic
 - Generate responses in languages inconsistent with the prompt
 
 ## License
-TBD
+[Krutrim Community License](./LICENSE)
 
 ## Ethical Considerations
 - The model may produce biased or offensive outputs based on its training data.
