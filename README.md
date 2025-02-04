@@ -156,7 +156,7 @@ The model was trained on a dataset that includes content from the internet, whic
 - Generate responses in languages inconsistent with the prompt
 
 ## License
-[Krutrim Community License](./LICENSE)
+[Krutrim Community License](./LICENSE.md)
 
 ## Ethical Considerations
 - The model may produce biased or offensive outputs based on its training data.
@@ -164,5 +164,7 @@ The model was trained on a dataset that includes content from the internet, whic
 - While safeguards have been implemented, the model may still generate socially undesirable text in certain contexts.
 
 ## Contact
-TBD
+Contributions are welcome! If you have any improvements or suggestions, feel free to submit a pull request on GitHub.
+
+
 
