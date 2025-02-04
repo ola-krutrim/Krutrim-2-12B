@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-model_id = "krutrim-ai-labs/Krutrim-2-base" # krutrim-ai-labs/Krutrim-2-instruct for instruct model
+model_id = "krutrim-ai-labs/Krutrim-2-instruct" 
 device = "cuda" if torch.cuda.is_available else "cpu"
 # Load model and tokenizer
 model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16)
