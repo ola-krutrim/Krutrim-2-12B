@@ -161,7 +161,7 @@ The model was trained on a dataset that includes content from the internet, whic
 - Generate responses in languages inconsistent with the prompt
 
 ## License
-[Krutrim Community License](./LICENSE.md)
+This code repository and the model weights are licensed under the [Krutrim Community License](./LICENSE.md)
 
 ## Ethical Considerations
 - The model may produce biased or offensive outputs based on its training data.
